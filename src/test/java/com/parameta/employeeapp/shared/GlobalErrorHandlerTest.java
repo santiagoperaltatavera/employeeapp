@@ -5,6 +5,7 @@ import com.parameta.employeeapp.application.services.EmployeeServiceImpl;
 import com.parameta.employeeapp.infrastructure.rest.EmployeeController;
 import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeRequestDTOImpl;
 import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeResponseDTOImpl;
+import com.parameta.employeeapp.shared.constants.HttpStatusCodes;
 import com.parameta.employeeapp.shared.error.GlobalErrorHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,7 +54,7 @@ class GlobalErrorHandlerTest {
                         .param("salary", "5000.0")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.statusCode").value(400))
+                .andExpect(jsonPath("$.statusCode").value(HttpStatusCodes.BAD_REQUEST))
                 .andExpect(jsonPath("$.message").value("Invalid date format: 2023-13-01"))
                 .andExpect(jsonPath("$.timestamp").exists())
                 .andExpect(jsonPath("$.path").exists());
@@ -74,7 +75,7 @@ class GlobalErrorHandlerTest {
                         .param("salary", "5000.0")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.statusCode").value(400))
+                .andExpect(jsonPath("$.statusCode").value(HttpStatusCodes.BAD_REQUEST))
                 .andExpect(jsonPath("$.message").value("Test IllegalArgumentException"))
                 .andExpect(jsonPath("$.timestamp").exists())
                 .andExpect(jsonPath("$.path").exists());
@@ -95,7 +96,7 @@ class GlobalErrorHandlerTest {
                         .param("salary", "5000.0")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isUnprocessableEntity())
-                .andExpect(jsonPath("$.statusCode").value(422))
+                .andExpect(jsonPath("$.statusCode").value(HttpStatusCodes.UNPROCESSABLE_ENTITY))
                 .andExpect(jsonPath("$.message").value("A required value was null: Test NullPointerException"))
                 .andExpect(jsonPath("$.timestamp").exists())
                 .andExpect(jsonPath("$.path").exists());
@@ -116,7 +117,7 @@ class GlobalErrorHandlerTest {
                         .param("salary", "5000.0")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotImplemented())
-                .andExpect(jsonPath("$.statusCode").value(501))
+                .andExpect(jsonPath("$.statusCode").value(HttpStatusCodes.NOT_IMPLEMENTED))
                 .andExpect(jsonPath("$.message").value("Operation not supported: Test UnsupportedOperationException"))
                 .andExpect(jsonPath("$.timestamp").exists())
                 .andExpect(jsonPath("$.path").exists());
