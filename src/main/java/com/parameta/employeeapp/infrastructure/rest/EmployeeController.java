@@ -1,6 +1,7 @@
 package com.parameta.employeeapp.infrastructure.rest;
 
 import com.parameta.employeeapp.application.services.EmployeeService;
+import com.parameta.employeeapp.application.services.EmployeeServiceImpl;
 import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeRequestDTOImpl;
 import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeResponseDTOImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,9 +18,9 @@ import java.time.LocalDate;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    private final EmployeeService employeeService;
+    private final EmployeeService<EmployeeRequestDTOImpl, EmployeeResponseDTOImpl> employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService<EmployeeRequestDTOImpl, EmployeeResponseDTOImpl> employeeService) {
         this.employeeService = employeeService;
     }
 
