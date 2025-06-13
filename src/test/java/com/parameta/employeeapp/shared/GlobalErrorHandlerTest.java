@@ -1,18 +1,18 @@
 package com.parameta.employeeapp.shared;
 
 import com.parameta.employeeapp.application.services.EmployeeService;
+import com.parameta.employeeapp.application.services.EmployeeServiceImpl;
 import com.parameta.employeeapp.infrastructure.rest.EmployeeController;
-import com.parameta.employeeapp.shared.error.ErrorResponse;
+import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeRequestDTOImpl;
+import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeResponseDTOImpl;
 import com.parameta.employeeapp.shared.error.GlobalErrorHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.request.WebRequest;
 
 import java.time.format.DateTimeParseException;
 
@@ -27,12 +27,12 @@ class GlobalErrorHandlerTest {
     private MockMvc mockMvc;
 
     @Mock
-    private EmployeeService employeeService;
+    private EmployeeService<EmployeeRequestDTOImpl, EmployeeResponseDTOImpl> employeeServiceImpl;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        EmployeeController employeeController = new EmployeeController(employeeService);
+        EmployeeController employeeController = new EmployeeController(employeeServiceImpl);
         mockMvc = MockMvcBuilders.standaloneSetup(employeeController)
                 .setControllerAdvice(new GlobalErrorHandler())
                 .build();
@@ -40,7 +40,7 @@ class GlobalErrorHandlerTest {
 
     @Test
     void testHandleDateTimeParseException() throws Exception {
-        when(employeeService.createEmployee(any())).thenThrow(new DateTimeParseException("Invalid date format", "2023-13-01", 0));
+        when(employeeServiceImpl.createEmployee(any())).thenThrow(new DateTimeParseException("Invalid date format", "2023-13-01", 0));
 
         mockMvc.perform(get("/employees")
                         .param("firstName", "John")
@@ -61,7 +61,7 @@ class GlobalErrorHandlerTest {
 
     @Test
     void testHandleIllegalArgumentException() throws Exception {
-        when(employeeService.createEmployee(any())).thenThrow(new IllegalArgumentException("Test IllegalArgumentException"));
+        when(employeeServiceImpl.createEmployee(any())).thenThrow(new IllegalArgumentException("Test IllegalArgumentException"));
 
         mockMvc.perform(get("/employees")
                         .param("firstName", "John")
@@ -82,7 +82,7 @@ class GlobalErrorHandlerTest {
 
     @Test
     void testHandleNullPointerException() throws Exception {
-        when(employeeService.createEmployee(any())).thenThrow(new NullPointerException("Test NullPointerException"));
+        when(employeeServiceImpl.createEmployee(any())).thenThrow(new NullPointerException("Test NullPointerException"));
 
         mockMvc.perform(get("/employees")
                         .param("firstName", "John")
@@ -103,7 +103,7 @@ class GlobalErrorHandlerTest {
 
     @Test
     void testHandleUnsupportedOperationException() throws Exception {
-        when(employeeService.createEmployee(any())).thenThrow(new UnsupportedOperationException("Test UnsupportedOperationException"));
+        when(employeeServiceImpl.createEmployee(any())).thenThrow(new UnsupportedOperationException("Test UnsupportedOperationException"));
 
         mockMvc.perform(get("/employees")
                         .param("firstName", "John")

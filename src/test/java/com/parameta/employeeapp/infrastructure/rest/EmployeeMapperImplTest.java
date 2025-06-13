@@ -1,5 +1,6 @@
 package com.parameta.employeeapp.infrastructure.rest;
 
+import com.parameta.employeeapp.application.mappers.EmployeeMapper;
 import com.parameta.employeeapp.domain.model.Employee;
 import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeRequestDTOImpl;
 import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeResponseDTOImpl;
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeMapperImplTest {
 
-    private EmployeeMapperImpl employeeMapper;
+    private EmployeeMapper<EmployeeRequestDTOImpl, EmployeeResponseDTOImpl> employeeMapper;
 
     @BeforeEach
     void setUp() {

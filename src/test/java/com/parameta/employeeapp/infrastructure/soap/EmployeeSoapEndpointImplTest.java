@@ -1,8 +1,11 @@
 package com.parameta.employeeapp.infrastructure.soap;
 
+import com.parameta.employeeapp.application.mappers.EmployeeSoapMapper;
 import com.parameta.employeeapp.application.services.EmployeeApplicationService;
+import com.parameta.employeeapp.application.services.EmployeeApplicationServiceImpl;
 import com.parameta.employeeapp.domain.model.Employee;
 import com.parameta.employeeapp.infrastructure.soap.dto.SoapEmployeeDTO;
+import com.parameta.employeeapp.infrastructure.soap.endpoint.EmployeeSoapEndpoint;
 import com.parameta.employeeapp.infrastructure.soap.endpoint.EmployeeSoapEndpointImpl;
 import com.parameta.employeeapp.infrastructure.soap.mapper.EmployeeSoapMapperImpl;
 import com.parameta.employeeapp.shared.utils.DateUtils;
@@ -19,13 +22,13 @@ import static org.mockito.Mockito.*;
 
 class EmployeeSoapEndpointImplTest {
 
-    private EmployeeSoapEndpointImpl employeeSoapEndpoint;
+    private EmployeeSoapEndpoint employeeSoapEndpoint;
 
     @Mock
-    private EmployeeApplicationService employeeApplicationService;
+    private EmployeeApplicationService<Employee>  employeeApplicationService;
 
     @Mock
-    private EmployeeSoapMapperImpl employeeSoapMapper;
+    private EmployeeSoapMapper<SoapEmployeeDTO, SoapEmployeeDTO> employeeSoapMapper;
 
     @BeforeEach
     void setUp() {

@@ -1,6 +1,8 @@
 package com.parameta.employeeapp.infrastructure.rest;
 
 import com.parameta.employeeapp.application.services.EmployeeService;
+import com.parameta.employeeapp.domain.model.Employee;
+import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeRequestDTOImpl;
 import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeResponseDTOImpl;
 import com.parameta.employeeapp.shared.error.GlobalErrorHandler;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +24,7 @@ class EmployeeControllerTest {
     private MockMvc mockMvc;
 
     @Mock
-    private EmployeeService employeeService;
+    private EmployeeService<EmployeeRequestDTOImpl, EmployeeResponseDTOImpl> employeeService;
 
     private EmployeeController employeeController;
 

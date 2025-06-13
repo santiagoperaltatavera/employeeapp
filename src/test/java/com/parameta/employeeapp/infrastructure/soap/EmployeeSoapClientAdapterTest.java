@@ -1,5 +1,7 @@
 package com.parameta.employeeapp.infrastructure.soap;
 
+import com.parameta.employeeapp.application.mappers.EmployeeSoapMapper;
+import com.parameta.employeeapp.application.ports.out.EmployeeSoapClientPort;
 import com.parameta.employeeapp.domain.model.Employee;
 import com.parameta.employeeapp.infrastructure.soap.adapter.EmployeeSoapClientAdapter;
 import com.parameta.employeeapp.infrastructure.soap.dto.SoapEmployeeDTO;
@@ -17,18 +19,18 @@ import static org.mockito.Mockito.*;
 
 class EmployeeSoapClientAdapterTest {
 
-    private EmployeeSoapClientAdapter employeeSoapClientAdapter;
+    private EmployeeSoapClientPort<Employee>  employeeSoapClientPort;
 
     @Mock
     private EmployeeSoapEndpoint employeeSoapEndpoint;
 
     @Mock
-    private EmployeeSoapMapperImpl employeeSoapMapper;
+    private EmployeeSoapMapper<SoapEmployeeDTO, SoapEmployeeDTO> employeeSoapMapper;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        employeeSoapClientAdapter = new EmployeeSoapClientAdapter(employeeSoapEndpoint, employeeSoapMapper);
+        employeeSoapClientPort = new EmployeeSoapClientAdapter(employeeSoapEndpoint, employeeSoapMapper);
     }
 
     @Test
@@ -47,7 +49,7 @@ class EmployeeSoapClientAdapterTest {
         SoapEmployeeDTO soapEmployeeDTO = new SoapEmployeeDTO();
         when(employeeSoapMapper.toSoapDTO(employee)).thenReturn(soapEmployeeDTO);
 
-        employeeSoapClientAdapter.sendEmployeeToSoap(employee);
+        employeeSoapClientPort.sendEmployeeToSoap(employee);
 
         verify(employeeSoapMapper, times(1)).toSoapDTO(employee);
         verify(employeeSoapEndpoint, times(1)).createEmployee(soapEmployeeDTO);
@@ -71,7 +73,7 @@ class EmployeeSoapClientAdapterTest {
         doThrow(new RuntimeException("SOAP endpoint error")).when(employeeSoapEndpoint).createEmployee(soapEmployeeDTO);
 
         try {
-            employeeSoapClientAdapter.sendEmployeeToSoap(employee);
+            employeeSoapClientPort.sendEmployeeToSoap(employee);
         } catch (RuntimeException e) {
             verify(employeeSoapMapper, times(1)).toSoapDTO(employee);
             verify(employeeSoapEndpoint, times(1)).createEmployee(soapEmployeeDTO);

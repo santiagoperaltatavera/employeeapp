@@ -1,5 +1,6 @@
 package com.parameta.employeeapp.infrastructure.repository;
 
+import com.parameta.employeeapp.domain.repository.EmployeeRepository;
 import com.parameta.employeeapp.infrastructure.database.repository.EmployeeEntity;
 import com.parameta.employeeapp.infrastructure.database.repository.EmployeeRepositoryImpl;
 import com.parameta.employeeapp.infrastructure.database.repository.JpaEmployeeRepository;
@@ -16,7 +17,7 @@ import static org.mockito.Mockito.*;
 
 class EmployeeRepositoryImplTest {
 
-    private EmployeeRepositoryImpl employeeRepository;
+    private EmployeeRepository<EmployeeEntity, Long>  employeeRepository;
 
     @Mock
     private JpaEmployeeRepository jpaEmployeeRepository;

@@ -1,12 +1,12 @@
 package com.parameta.employeeapp.infrastructure.soap;
 
+import com.parameta.employeeapp.application.mappers.EmployeeSoapMapper;
 import com.parameta.employeeapp.domain.model.Employee;
 import com.parameta.employeeapp.infrastructure.soap.dto.SoapEmployeeDTO;
 import com.parameta.employeeapp.infrastructure.soap.mapper.EmployeeSoapMapperImpl;
 import com.parameta.employeeapp.shared.utils.DateUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeSoapMapperImplTest {
 
-    private EmployeeSoapMapperImpl employeeSoapMapper;
+    private EmployeeSoapMapper<SoapEmployeeDTO, SoapEmployeeDTO> employeeSoapMapper;
     
 
     @BeforeEach
@@ -29,8 +29,6 @@ class EmployeeSoapMapperImplTest {
     void testToSoapDTOSuccess() {
         LocalDate dateOfBirth = LocalDate.of(1990, 1, 1);
         LocalDate hireDate = LocalDate.of(2020, 1, 1);
-        XMLGregorianCalendar xmlDateOfBirth = DateUtils.toXMLGregorianCalendar(dateOfBirth);
-        XMLGregorianCalendar xmlHireDate = DateUtils.toXMLGregorianCalendar(hireDate);
 
         Employee employee = Employee.builder()
                 .firstName("John")
