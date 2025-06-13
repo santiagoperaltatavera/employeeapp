@@ -1,6 +1,8 @@
 package com.parameta.employeeapp.infrastructure.soap.endpoint;
 
+import com.parameta.employeeapp.application.mappers.EmployeeSoapMapper;
 import com.parameta.employeeapp.application.services.EmployeeApplicationService;
+import com.parameta.employeeapp.application.services.EmployeeApplicationServiceImpl;
 import com.parameta.employeeapp.domain.model.Employee;
 import com.parameta.employeeapp.infrastructure.soap.dto.SoapEmployeeDTO;
 import com.parameta.employeeapp.infrastructure.soap.mapper.EmployeeSoapMapperImpl;
@@ -12,12 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class EmployeeSoapEndpointImpl implements EmployeeSoapEndpoint {
 
-    private final EmployeeApplicationService employeeApplicationService;
-    private final EmployeeSoapMapperImpl employeeSoapMapper;
+    private final EmployeeApplicationService<Employee> employeeApplicationService;
+    private final EmployeeSoapMapper<SoapEmployeeDTO, SoapEmployeeDTO> employeeSoapMapper;
 
-    public EmployeeSoapEndpointImpl(EmployeeApplicationService employeeApplicationService,
-                                    EmployeeSoapMapperImpl employeeSoapMapper) {
-        this.employeeApplicationService = employeeApplicationService;
+
+    public EmployeeSoapEndpointImpl(EmployeeApplicationService<Employee> employeeApplicationServiceImpl,
+                                    EmployeeSoapMapper<SoapEmployeeDTO, SoapEmployeeDTO> employeeSoapMapper) {
+        this.employeeApplicationService = employeeApplicationServiceImpl;
         this.employeeSoapMapper = employeeSoapMapper;
     }
 

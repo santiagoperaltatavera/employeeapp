@@ -1,5 +1,6 @@
 package com.parameta.employeeapp.infrastructure.soap.adapter;
 
+import com.parameta.employeeapp.application.mappers.EmployeeSoapMapper;
 import com.parameta.employeeapp.application.ports.out.EmployeeSoapClientPort;
 import com.parameta.employeeapp.domain.model.Employee;
 import com.parameta.employeeapp.infrastructure.soap.dto.SoapEmployeeDTO;
@@ -11,10 +12,10 @@ import org.springframework.stereotype.Component;
 public class EmployeeSoapClientAdapter implements EmployeeSoapClientPort<Employee> {
 
     private final EmployeeSoapEndpoint employeeSoapEndpoint;
-    private final EmployeeSoapMapperImpl employeeSoapMapper;
+    private final EmployeeSoapMapper<SoapEmployeeDTO, SoapEmployeeDTO> employeeSoapMapper;
 
     public EmployeeSoapClientAdapter(EmployeeSoapEndpoint employeeSoapEndpoint,
-                                     EmployeeSoapMapperImpl employeeSoapMapper) {
+                                     EmployeeSoapMapper<SoapEmployeeDTO, SoapEmployeeDTO> employeeSoapMapper) {
         this.employeeSoapEndpoint = employeeSoapEndpoint;
         this.employeeSoapMapper = employeeSoapMapper;
     }
