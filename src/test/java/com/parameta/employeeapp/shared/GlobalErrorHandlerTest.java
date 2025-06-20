@@ -1,10 +1,9 @@
 package com.parameta.employeeapp.shared;
 
 import com.parameta.employeeapp.application.services.EmployeeService;
-import com.parameta.employeeapp.application.services.EmployeeServiceImpl;
 import com.parameta.employeeapp.infrastructure.rest.EmployeeController;
-import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeRequestDTOImpl;
-import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeResponseDTOImpl;
+import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeRequestDTO;
+import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeResponseDTO;
 import com.parameta.employeeapp.shared.constants.HttpStatusCodes;
 import com.parameta.employeeapp.shared.error.GlobalErrorHandler;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +27,7 @@ class GlobalErrorHandlerTest {
     private MockMvc mockMvc;
 
     @Mock
-    private EmployeeService<EmployeeRequestDTOImpl, EmployeeResponseDTOImpl> employeeServiceImpl;
+    private EmployeeService<EmployeeRequestDTO, EmployeeResponseDTO> employeeServiceImpl;
 
     @BeforeEach
     void setUp() {
