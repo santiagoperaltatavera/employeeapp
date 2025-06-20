@@ -1,9 +1,8 @@
 package com.parameta.employeeapp.infrastructure.rest;
 
 import com.parameta.employeeapp.application.services.EmployeeService;
-import com.parameta.employeeapp.domain.model.Employee;
-import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeRequestDTOImpl;
-import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeResponseDTOImpl;
+import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeRequestDTO;
+import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeResponseDTO;
 import com.parameta.employeeapp.shared.error.GlobalErrorHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,7 @@ class EmployeeControllerTest {
     private MockMvc mockMvc;
 
     @Mock
-    private EmployeeService<EmployeeRequestDTOImpl, EmployeeResponseDTOImpl> employeeService;
+    private EmployeeService<EmployeeRequestDTO, EmployeeResponseDTO> employeeService;
 
     private EmployeeController employeeController;
 
@@ -88,7 +87,7 @@ class EmployeeControllerTest {
 
     @Test
     void testCreateEmployeeBoundaryValues() throws Exception {
-        EmployeeResponseDTOImpl responseDTO = new EmployeeResponseDTOImpl(
+        EmployeeResponseDTO responseDTO = new EmployeeResponseDTO(
                 "John", "Doe", "ID", "12345",
                 "1900-01-01", "2020-01-01", "Developer", 1000000.0,
                 "123 years", "3 years"
