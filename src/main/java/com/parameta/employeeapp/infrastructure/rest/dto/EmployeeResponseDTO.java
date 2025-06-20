@@ -1,10 +1,9 @@
 package com.parameta.employeeapp.infrastructure.rest.dto;
 
-import com.parameta.employeeapp.application.dtos.EmployeeResponseDTO;
 
 import java.time.LocalDate;
 
-public class EmployeeResponseDTOImpl implements EmployeeResponseDTO {
+public class EmployeeResponseDTOImpl {
 
     private final String firstName;
     private final String lastName;
