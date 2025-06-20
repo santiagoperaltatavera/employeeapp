@@ -1,6 +1,6 @@
 package com.parameta.employeeapp.application.validators;
 
-import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeRequestDTOImpl;
+import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeRequestDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EmployeeValidatorImplTest {
 
-    private EmployeeValidator<EmployeeRequestDTOImpl> employeeValidator;
+    private EmployeeValidator<EmployeeRequestDTO> employeeValidator;
 
     @BeforeEach
     void setUp() {
@@ -19,7 +19,7 @@ class EmployeeValidatorImplTest {
 
     @Test
     void testValidateFutureDateOfBirth() {
-        EmployeeRequestDTOImpl dto = new EmployeeRequestDTOImpl(
+        EmployeeRequestDTO dto = new EmployeeRequestDTO(
                 "John", "Doe", "ID", "12345",
                 LocalDate.of(2090, 1, 1), LocalDate.of(2020, 1, 1),
                 "Developer", 5000.0
@@ -31,7 +31,7 @@ class EmployeeValidatorImplTest {
 
     @Test
     void testValidateHireDateBeforeDateOfBirth() {
-        EmployeeRequestDTOImpl dto = new EmployeeRequestDTOImpl(
+        EmployeeRequestDTO dto = new EmployeeRequestDTO(
                 "John", "Doe", "ID", "12345",
                 LocalDate.of(1990, 1, 1), LocalDate.of(1980, 1, 1),
                 "Developer", 5000.0
@@ -43,7 +43,7 @@ class EmployeeValidatorImplTest {
 
     @Test
     void testValidateHireDateInFuture() {
-        EmployeeRequestDTOImpl dto = new EmployeeRequestDTOImpl(
+        EmployeeRequestDTO dto = new EmployeeRequestDTO(
                 "John", "Doe", "ID", "12345",
                 LocalDate.of(1990, 1, 1), LocalDate.of(2090, 1, 1),
                 "Developer", 5000.0
@@ -55,7 +55,7 @@ class EmployeeValidatorImplTest {
 
     @Test
     void testValidateEmployeeUnder18YearsOld() {
-        EmployeeRequestDTOImpl dto = new EmployeeRequestDTOImpl(
+        EmployeeRequestDTO dto = new EmployeeRequestDTO(
                 "John", "Doe", "ID", "12345",
                 LocalDate.of(LocalDate.now().getYear() - 17, 1, 1), LocalDate.of(2020, 1, 1),
                 "Developer", 5000.0
@@ -67,7 +67,7 @@ class EmployeeValidatorImplTest {
 
     @Test
     void testValidateValidEmployee() {
-        EmployeeRequestDTOImpl dto = new EmployeeRequestDTOImpl(
+        EmployeeRequestDTO dto = new EmployeeRequestDTO(
                 "John", "Doe", "ID", "12345",
                 LocalDate.of(1990, 1, 1), LocalDate.of(2020, 1, 1),
                 "Developer", 5000.0
