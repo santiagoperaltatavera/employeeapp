@@ -1,9 +1,8 @@
 package com.parameta.employeeapp.infrastructure.rest;
 
 import com.parameta.employeeapp.application.services.EmployeeService;
-import com.parameta.employeeapp.application.services.EmployeeServiceImpl;
-import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeRequestDTOImpl;
-import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeResponseDTOImpl;
+import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeRequestDTO;
+import com.parameta.employeeapp.infrastructure.rest.dto.EmployeeResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -18,23 +17,23 @@ import java.time.LocalDate;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    private final EmployeeService<EmployeeRequestDTOImpl, EmployeeResponseDTOImpl> employeeService;
+    private final EmployeeService<EmployeeRequestDTO, EmployeeResponseDTO> employeeService;
 
-    public EmployeeController(EmployeeService<EmployeeRequestDTOImpl, EmployeeResponseDTOImpl> employeeService) {
+    public EmployeeController(EmployeeService<EmployeeRequestDTO, EmployeeResponseDTO> employeeService) {
         this.employeeService = employeeService;
     }
 
     @Operation(summary = "Create a new employee", description = "Creates an employee with the provided details")
     @GetMapping
-    public ResponseEntity<EmployeeResponseDTOImpl> createEmployee(@Valid @RequestParam String firstName,
-                                                                  @RequestParam String lastName,
-                                                                  @RequestParam String documentType,
-                                                                  @RequestParam String documentNumber,
-                                                                  @RequestParam String dateOfBirth,
-                                                                  @RequestParam String hireDate,
-                                                                  @RequestParam String position,
-                                                                  @RequestParam Double salary) {
-        EmployeeRequestDTOImpl requestDTO = new EmployeeRequestDTOImpl(
+    public ResponseEntity<EmployeeResponseDTO> createEmployee(@Valid @RequestParam String firstName,
+                                                              @RequestParam String lastName,
+                                                              @RequestParam String documentType,
+                                                              @RequestParam String documentNumber,
+                                                              @RequestParam String dateOfBirth,
+                                                              @RequestParam String hireDate,
+                                                              @RequestParam String position,
+                                                              @RequestParam Double salary) {
+        EmployeeRequestDTO requestDTO = new EmployeeRequestDTO(
                 firstName,
                 lastName,
                 documentType,
@@ -45,7 +44,7 @@ public class EmployeeController {
                 salary
         );
 
-        EmployeeResponseDTOImpl response = employeeService.createEmployee(requestDTO);
+        EmployeeResponseDTO response = employeeService.createEmployee(requestDTO);
         return ResponseEntity.ok(response);
     }
 }
