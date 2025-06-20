@@ -1,6 +1,5 @@
 package com.parameta.employeeapp.infrastructure.soap.dto;
 
-import com.parameta.employeeapp.application.dtos.EmployeeDTO;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
@@ -11,7 +10,7 @@ import java.time.LocalDate;
 
 @XmlRootElement(name = "Employee")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SoapEmployeeDTO implements EmployeeDTO {
+public class SoapEmployeeDTO {
 
     @XmlElement(required = true)
     private String firstName;
@@ -68,12 +67,10 @@ public class SoapEmployeeDTO implements EmployeeDTO {
         return documentNumber;
     }
 
-    @Override
     public LocalDate getDateOfBirth() {
         return dateOfBirth.toGregorianCalendar().toZonedDateTime().toLocalDate();
     }
 
-    @Override
     public LocalDate getHireDate() {
         return hireDate.toGregorianCalendar().toZonedDateTime().toLocalDate();
     }
